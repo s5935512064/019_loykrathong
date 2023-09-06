@@ -2,26 +2,171 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body {
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    260.4deg,
+    rgba(255, 149, 149, 0.78) 5.94%,
+    rgba(58, 137, 255, 0.713602) 58.41%,
+    rgba(144, 92, 255, 0.63) 114.03%
+  );
+  backdrop-filter: blur(4px);
+  position: absolute;
+  z-index: 0 !important;
+}
+
+.kratong {
+  --size: 512px;
+  width: var(--size);
+  position: relative;
+  z-index: var(--z-index);
+}
+
+.aura {
+  width: calc(var(--size) + 50px);
+  height: calc(var(--size) + 50px);
+  top: 0;
+  left: -25px;
+  position: relative;
+  background-color: #fef3c7;
+  opacity: 30%;
+  border-radius: 9999px;
+  filter: blur(10px);
+}
+
+.caura {
+  width: calc(var(--size) + 150px);
+  height: calc(var(--size) + 150px);
+  top: 0;
+  left: -85px;
+  position: relative;
+  background-color: #fef3c7;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #fdf188 0%,
+    rgba(247, 244, 159, 0) 100%
+  );
+  opacity: 0.5;
+  border-radius: 9999px;
+  filter: blur(10px);
+}
+
+.kratong .base {
+  display: inline-block;
+}
+
+.kratong .base .flowers {
+  position: absolute;
+  z-index: calc(var(--z-index) - 1);
+  top: 0;
+}
+
+.kratong .base .shell {
+  z-index: var(--z-index);
+  position: absolute;
+  top: 0;
+}
+
+.kratong .topping .candle {
+  position: absolute;
+  z-index: calc(var(--z-index) - 2);
+  top: 0;
+}
+
+.kratong .topping .decorations {
+  position: absolute;
+  z-index: calc(var(--z-index) - 3);
+  top: 0;
+}
+
+.boat {
+  animation: boat 4s linear infinite;
+}
+
+.boat-left {
+  animation: boat2 6s linear infinite;
+}
+
+.wave-water {
+  min-width: 1260px;
+  height: 100%;
+  background-repeat: repeat-x !important;
+  animation: 12.6s linear 0s infinite normal none running animation-1wdgn51;
+  backface-visibility: hidden;
+}
+
+.star {
+  background-color: white;
+  position: relative;
+  border-radius: 50%;
+  animation-name: twinkle;
+  animation-iteration-count: infinite;
+}
+
+@keyframes twinkle {
+  50% {
+    transform: scale(0.2);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@keyframes animation-1wdgn51 {
+  0% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(540px);
+  }
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 1920px 0;
+  }
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 1920px 0;
+  }
+}
+
+@keyframes boat {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(-7deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes boat2 {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(-7deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
 }
