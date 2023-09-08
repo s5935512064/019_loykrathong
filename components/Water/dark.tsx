@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { motion } from "framer-motion";
+import { WaterOneData } from "@map/animations";
 
 interface Props {}
 
@@ -10,16 +11,9 @@ function classNames(...classes: any[]) {
 export const WaterOne: NextPage = () => {
   return (
     <motion.svg
-      style={{
-        width: "125%",
-        height: "100%",
-        zIndex: 41,
-        position: "relative",
-      }}
+      className="w-full h-full relative"
       // animate={WaterOneData.animate}
       // transition={WaterOneData.transition}
-      width="2992"
-      height="605"
       viewBox="0 0 2992 605"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

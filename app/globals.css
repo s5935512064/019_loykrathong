@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html,
+  body {
+    font-family: var(--font-fc_ekaluckregular), var(--font-helventica);
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth !important;
+  }
+}
+
 body {
 }
 
@@ -105,6 +114,13 @@ body {
   border-radius: 50%;
   animation-name: twinkle;
   animation-iteration-count: infinite;
+}
+
+.lotus {
+  background-image: url("/assets/scene/lotusRand.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
 }
 
 @keyframes twinkle {
