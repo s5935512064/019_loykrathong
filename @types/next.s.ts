@@ -8,4 +8,23 @@ declare global {
     profile: string;
     krathong_type: number;
   }
+
+  interface KratongItem {
+    id: number;
+    name: string;
+    src: string;
+    type: number;
+  }
+
+  interface LocalKratongItem {
+    name: string;
+    wish: string;
+    kratong: {
+      id: number;
+      name: string;
+      src: string;
+      type: number;
+    };
+    loy: boolean;
+  }
 }

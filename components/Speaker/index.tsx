@@ -9,6 +9,8 @@ import React, {
   useRef,
 } from "react";
 import { SpeakerMute, SpeakerUnmute } from "@components/Vector";
+import Link from "next/link";
+import Image from "next/image";
 
 interface Props {}
 
@@ -18,22 +20,8 @@ function classNames(...classes: any[]) {
 
 const Speaker: FC<Props> = (): JSX.Element => {
   const [mute, setMute] = useState(true);
+  const [year, setYear] = useState<any>("2023");
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  // const handleKeydown = (event: any) => {
-  //   if (event.repeat) {
-  //     return;
-  //   }
-  //   if (audioRef.current != null) {
-  //     audioRef.current.pause();
-  //     audioRef.current.currentTime = 0;
-  //     audioRef.current.play();
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleKeydown(event);
-  // }, []);
 
   useEffect(() => {
     if (audioRef.current !== null && mute == false) {
@@ -60,9 +48,52 @@ const Speaker: FC<Props> = (): JSX.Element => {
           <source src="/assets/audio/music.mp3" type="audio/mpeg"></source>
         </audio>
 
-        <div className="fixed bottom-0 w-screen z-[99]">
+        <div className="fixed bottom-0 w-screen !z-[50] flex justify-between">
+          <div className="absolute left-6 bottom-6 text-white hidden xmd:block">
+            <div className="flex items-center h-full lg:gap-3 lg:divide-x w-fit flex-col lg:flex-row">
+              <Link legacyBehavior href={"https://siamsindhorn.com/"}>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="goto_website"
+                  className="h-9 w-28 relative "
+                >
+                  <Image
+                    src={"/assets/Logo_SSD.webp"}
+                    alt="logo"
+                    priority
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    unoptimized={true}
+                    style={{
+                      objectFit: "contain",
+                      objectPosition: "center",
+                    }}
+                    className="w-full h-full"
+                  />
+                </a>
+              </Link>
+
+              <p className="text-center  pl-3">
+                Copyright © 2023 {year != "2023" && -year}{" "}
+                <Link legacyBehavior href={"https://siamsindhorn.com/"}>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="name_goto_website"
+                    className="font-medium cursor-pointer mr-1 italic"
+                  >
+                    Siam Sindhorn Co., Ltd.
+                  </a>
+                </Link>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+
           <div
-            className="absolute text-center right-6 bottom-4 cursor-pointer text-white w-9 h-9"
+            className="absolute text-center right-6 bottom-6 cursor-pointer text-white w-9 h-9"
             onClick={() => {
               setMute(!mute);
             }}

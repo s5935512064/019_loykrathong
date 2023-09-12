@@ -1,12 +1,13 @@
 "use client";
 import React, { FC, useEffect, useState, Fragment } from "react";
-import { useWindowDimensions, useAnimationFrame } from "@utils/index";
 import { TopLane, MidLane, BotLane } from "@components/KratongItem";
 import { AnimatePresence, motion } from "framer-motion";
 import { MidLaneSpecial, TopLaneSpecial } from "@/components/BoardKratong";
-
+import { MidLaneSelf } from "@components/SelfKratong";
 interface Props {
   data: any;
+  onloy: boolean;
+  selfKratong?: LocalKratongItem;
 }
 
 function random(min: number, max: number) {
@@ -80,8 +81,10 @@ const managerKrathong = [
   ],
 ];
 
-const Lake: FC<Props> = ({ data }): JSX.Element => {
+const Lake: FC<Props> = ({ data, onloy, selfKratong }): JSX.Element => {
   const [lanes, setLanes] = useState<any>([[], [], []]);
+
+  // const [selfKrathong, setSelfKratong] = useState<LocalKratongItem>();
 
   useEffect(() => {
     if (data.length > 0) {
@@ -91,6 +94,15 @@ const Lake: FC<Props> = ({ data }): JSX.Element => {
   }, [data]);
 
   shuffle(data);
+
+  // useEffect(() => {
+  //   if (onloy == true) {
+  //     const temp = window.localStorage.getItem("userData");
+  //     if (temp) {
+  //       setSelfKratong(JSON.parse(temp));
+  //     }
+  //   }
+  // }, [onloy]);
 
   return (
     <>
@@ -108,6 +120,7 @@ const Lake: FC<Props> = ({ data }): JSX.Element => {
           className="  h-1/4 flex flex-row items-center   relative "
         >
           <MidLane sample={lanes[1]} />
+          {onloy && selfKratong ? <MidLaneSelf sample={selfKratong} /> : null}
           <MidLaneSpecial sample={managerKrathong[0]} />
           <MidLaneSpecial sample={managerKrathong[1]} />
         </motion.div>

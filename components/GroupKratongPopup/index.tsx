@@ -14,15 +14,16 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
   lane: string;
-  info: ManagerKrathong;
+  info: LocalKratongItem;
+  zIndex: number;
 }
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const KrathongPopup: FC<Props> = ({ lane, info }): JSX.Element => {
-  const [toggle, setToggle] = useState(true);
+const GroupKratongPopup: FC<Props> = ({ lane, info, zIndex }): JSX.Element => {
+  const [toggle, setToggle] = useState(Math.random() < 0.2);
 
   return (
     <>
@@ -30,12 +31,12 @@ const KrathongPopup: FC<Props> = ({ lane, info }): JSX.Element => {
         onClick={() => setToggle(!toggle)}
         className={classNames(
           lane == "t"
-            ? "w-36 h-36 md:w-44 md:h-44 brightness-[85%] hover:brightness-100 active:brightness-110  -translate-y-10 md:-translate-y-7"
+            ? "w-24 h-24 md:w-32 md:h-32 brightness-[85%] hover:brightness-100 active:brightness-110"
             : lane == "m"
-            ? "w-40 h-40 md:w-48 md:h-48 brightness-[95%] hover:brightness-100 active:brightness-110 -translate-y-2 md:-translate-y-3"
+            ? "w-32 h-32 md:w-36 md:h-36 brightness-[95%] hover:brightness-100 active:brightness-110"
             : "w-36 h-36 md:w-40 md:h-40 hover:brightness-100 active:brightness-110",
-          " relative duration-200 transition-all cursor-pointer !z-[99] ",
-          ""
+          " relative duration-200 transition-all cursor-pointer ",
+          `!z-[${zIndex}]`
         )}
       >
         <AnimatePresence>
@@ -48,28 +49,13 @@ const KrathongPopup: FC<Props> = ({ lane, info }): JSX.Element => {
                 ease: [0, 0.71, 0.2, 1.01],
               }}
               exit={{ opacity: 0, scale: 0.5 }}
-              className="w-fif h-fit bg-white/80 backdrop-blur-sm rounded-xl absolute -top-10 flex justify-center items-center translate-x-1/2 !z-[-99] shadow "
+              className="w-full h-fit bg-white/80 backdrop-blur-sm rounded-xl absolute -top-10 flex justify-center items-center translate-x-1/2 !z-[-99] shadow "
             >
-              <div className="p-4 max-w-[250px] text-xs md:text-sm flex flex-col">
-                <p>{info.wish.substring(0, 150)}</p>
-                <div className="flex items-center gap-2 justify-end">
-                  <div className="w-6 h-6 md:w-7 md:h-7 bg-white rounded-full shrink-0 relative overflow-hidden">
-                    <Image
-                      unoptimized
-                      src={info.profile}
-                      alt="kratong"
-                      width="0"
-                      height="0"
-                      sizes="100vw"
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      className="w-full h-full "
-                    />
-                  </div>
-                  <span className="font-semibold">{info.name}</span>
-                </div>
+              <div className="p-4 max-w-[250px] text-xs md:text-sm flex flex-col relative w-full">
+                <p className="!w-full text-left ">
+                  {info.wish.substring(0, 150)} <br /> ...
+                  <span className="px-1 font-semibold">{info.name}</span>
+                </p>
               </div>
             </motion.div>
           ) : null}
@@ -77,8 +63,8 @@ const KrathongPopup: FC<Props> = ({ lane, info }): JSX.Element => {
 
         <Image
           unoptimized
-          src={`/assets/kratong/krathong-special-${info.krathong_type}.webp`}
-          alt="kratong"
+          src={info.kratong.src}
+          alt={`kratong-${info.name}`}
           width="0"
           height="0"
           sizes="100vw"
@@ -126,4 +112,4 @@ const KrathongPopup: FC<Props> = ({ lane, info }): JSX.Element => {
   );
 };
 
-export default KrathongPopup;
+export default GroupKratongPopup;

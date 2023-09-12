@@ -10,7 +10,6 @@ import React, {
 } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { WaterOneData } from "@map/animations";
-import { useWindowDimensions, random, useAnimationFrame } from "@utils/index";
 import Image from "next/image";
 import KrathongPopup from "../KrathongPopup";
 
@@ -46,11 +45,10 @@ export const MovingKratongSpecial: NextPage<{
   speed?: number;
   lane: string;
 }> = ({ initialX = 0, data, lane }) => {
-  const { width, height } = useWindowDimensions();
   const [toggle, setToggle] = useState(false);
   let xPosition = getRndInteger(0, 250);
   let yPosition = getRndInteger(-10, 50);
-  let delay = getRndDecimal(1, 2);
+  let delay = getRndDecimal(1, 10);
   let speed = getRndInteger(200, 350);
   const [x, setX] = useState(initialX);
   const zIndex = lane === "t" ? 39 : lane === "m" ? 29 : 9;
@@ -72,8 +70,9 @@ export const MovingKratongSpecial: NextPage<{
             repeat: Infinity,
             repeatType: "loop",
           },
+          delay: delay,
         }}
-        className="absolute left-[-75px]"
+        className="absolute left-[-100px]"
       >
         <motion.div
           animate={WaterOneData.animate}

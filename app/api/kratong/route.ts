@@ -4,108 +4,655 @@ import { NextRequest, NextResponse } from "next/server";
 type Data = {};
 
 const kratong_list = [
-  { id: 1, name: "Test1", type: 1 },
-  { id: 2, name: "Test2", type: 3 },
-  { id: 3, name: "Test3", type: 2 },
-  { id: 4, name: "Test4", type: 2 },
-  { id: 5, name: "Test5", type: 1 },
-  { id: 6, name: "Test6", type: 2 },
-  { id: 7, name: "Test7", type: 1 },
-  { id: 8, name: "Test8", type: 2 },
-  { id: 9, name: "Test9", type: 4 },
-  { id: 10, name: "Test10", type: 1 },
-  { id: 11, name: "Test11", type: 2 },
-  { id: 12, name: "Test12", type: 1 },
-  { id: 13, name: "Test13", type: 1 },
-  { id: 14, name: "Test14", type: 2 },
-  { id: 15, name: "Test15", type: 1 },
-  { id: 16, name: "Test16", type: 3 },
-  { id: 17, name: "Test17", type: 2 },
-  { id: 18, name: "Test18", type: 1 },
-  { id: 19, name: "Test19", type: 1 },
-  { id: 20, name: "Test20", type: 4 },
-  { id: 21, name: "Test21", type: 2 },
-  { id: 22, name: "Test22", type: 1 },
-  { id: 23, name: "Test23", type: 2 },
-  { id: 24, name: "Test24", type: 3 },
-  { id: 25, name: "Test25", type: 1 },
-  { id: 26, name: "Test26", type: 4 },
-  { id: 27, name: "Test27", type: 2 },
-  { id: 28, name: "Test28", type: 2 },
-  { id: 29, name: "Test29", type: 2 },
-  { id: 30, name: "Test30", type: 3 },
-  { id: 31, name: "Test31", type: 1 },
-  { id: 32, name: "Test32", type: 1 },
-  { id: 33, name: "Test33", type: 4 },
-  { id: 34, name: "Test34", type: 1 },
-  { id: 35, name: "Test35", type: 1 },
-  { id: 36, name: "Test36", type: 2 },
-  { id: 37, name: "Test37", type: 1 },
-  { id: 38, name: "Test38", type: 3 },
-  { id: 39, name: "Test39", type: 3 },
-  { id: 40, name: "Test40", type: 1 },
-  { id: 41, name: "Test41", type: 2 },
-  { id: 42, name: "Test42", type: 1 },
-  { id: 43, name: "Test43", type: 1 },
-  { id: 44, name: "Test44", type: 1 },
-  { id: 45, name: "Test45", type: 4 },
-  { id: 46, name: "Test46", type: 4 },
-  { id: 47, name: "Test47", type: 1 },
-  { id: 48, name: "Test48", type: 2 },
-  { id: 49, name: "Test49", type: 1 },
-  { id: 50, name: "Test50", type: 1 },
-  { id: 51, name: "Test51", type: 3 },
-  { id: 52, name: "Test52", type: 1 },
-  { id: 53, name: "Test53", type: 1 },
-  { id: 54, name: "Test54", type: 2 },
-  { id: 55, name: "Test55", type: 1 },
-  { id: 56, name: "Test56", type: 1 },
-  { id: 57, name: "Test57", type: 4 },
-  { id: 58, name: "Test58", type: 1 },
-  { id: 59, name: "Test59", type: 1 },
-  { id: 60, name: "Test60", type: 2 },
-  { id: 61, name: "Test61", type: 1 },
-  { id: 62, name: "Test62", type: 1 },
-  { id: 63, name: "Test63", type: 2 },
-  { id: 64, name: "Test64", type: 4 },
-  { id: 65, name: "Test65", type: 3 },
-  { id: 66, name: "Test66", type: 2 },
-  { id: 67, name: "Test67", type: 1 },
-  { id: 68, name: "Test68", type: 1 },
-  { id: 69, name: "Test69", type: 2 },
-  { id: 70, name: "Test70", type: 2 },
-  { id: 71, name: "Test71", type: 2 },
-  { id: 72, name: "Test72", type: 2 },
-  { id: 73, name: "Test73", type: 1 },
-  { id: 74, name: "Test74", type: 1 },
-  { id: 75, name: "Test75", type: 3 },
-  { id: 76, name: "Test76", type: 4 },
-  { id: 77, name: "Test77", type: 1 },
-  { id: 78, name: "Test78", type: 2 },
-  { id: 79, name: "Test79", type: 1 },
-  { id: 80, name: "Test80", type: 4 },
+  {
+    id: 1,
+    name: "test1",
+    wish: "test wish",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
 
-  { id: 81, name: "Test81", type: 1 },
-  { id: 82, name: "Test82", type: 2 },
-  { id: 83, name: "Test83", type: 1 },
-  { id: 84, name: "Test84", type: 3 },
-  { id: 85, name: "Test85", type: 2 },
-  { id: 86, name: "Test86", type: 1 },
-  { id: 87, name: "Test87", type: 4 },
-  { id: 88, name: "Test88", type: 2 },
-  { id: 89, name: "Test89", type: 1 },
-  { id: 90, name: "Test90", type: 1 },
+  {
+    id: 2,
+    name: "test2",
+    wish: "test wish2",
+    kratong: {
+      id: 2,
+      name: "kratong-2",
+      type: 2,
+      src: "/assets/kratong/kratong-2.webp",
+    },
+    loy: false,
+  },
 
-  { id: 91, name: "Test91", type: 1 },
-  { id: 92, name: "Test92", type: 1 },
-  { id: 93, name: "Test93", type: 3 },
-  { id: 94, name: "Test94", type: 4 },
-  { id: 95, name: "Test95", type: 2 },
-  { id: 96, name: "Test96", type: 1 },
-  { id: 97, name: "Test97", type: 3 },
-  { id: 98, name: "Test98", type: 1 },
-  { id: 99, name: "Test99", type: 2 },
-  { id: 100, name: "Test100" },
+  {
+    id: 3,
+    name: "test3",
+    wish: "test wish3",
+    kratong: {
+      id: 3,
+      name: "kratong-3",
+      type: 3,
+      src: "/assets/kratong/kratong-3.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 4,
+    name: "test4",
+    wish: "test wish4",
+    kratong: {
+      id: 4,
+      name: "kratong-9",
+      type: 9,
+      src: "/assets/kratong/kratong-9.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 5,
+    name: "test5",
+    wish: "test wish5",
+    kratong: {
+      id: 5,
+      name: "kratong-4",
+      type: 4,
+      src: "/assets/kratong/kratong-4.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 6,
+    name: "test6",
+    wish: "test wish6",
+    kratong: {
+      id: 6,
+      name: "kratong-5",
+      type: 5,
+      src: "/assets/kratong/kratong-5.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 7,
+    name: "test7",
+    wish: "test wish7",
+    kratong: {
+      id: 7,
+      name: "kratong-7",
+      type: 7,
+      src: "/assets/kratong/kratong-7.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 8,
+    name: "test8",
+    wish: "test wish8",
+    kratong: {
+      id: 8,
+      name: "kratong-8",
+      type: 8,
+      src: "/assets/kratong/kratong-8.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 9,
+    name: "test9",
+    wish: "test wish9",
+    kratong: {
+      id: 6,
+      name: "kratong-6",
+      type: 6,
+      src: "/assets/kratong/kratong-6.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 10,
+    name: "test1",
+    wish: "test wish",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 11,
+    name: "test11",
+    wish: "test wish11",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 12,
+    name: "test12",
+    wish: "test wish12",
+    kratong: {
+      id: 2,
+      name: "kratong-2",
+      type: 2,
+      src: "/assets/kratong/kratong-2.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 13,
+    name: "test13",
+    wish: "test wish13",
+    kratong: {
+      id: 3,
+      name: "kratong-3",
+      type: 3,
+      src: "/assets/kratong/kratong-3.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 14,
+    name: "test14",
+    wish: "test wish14",
+    kratong: {
+      id: 4,
+      name: "kratong-9",
+      type: 9,
+      src: "/assets/kratong/kratong-9.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 15,
+    name: "test15",
+    wish: "test wish15",
+    kratong: {
+      id: 5,
+      name: "kratong-4",
+      type: 4,
+      src: "/assets/kratong/kratong-4.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 16,
+    name: "test16",
+    wish: "test wish16",
+    kratong: {
+      id: 6,
+      name: "kratong-5",
+      type: 5,
+      src: "/assets/kratong/kratong-5.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 17,
+    name: "test17",
+    wish: "test wish17",
+    kratong: {
+      id: 7,
+      name: "kratong-7",
+      type: 7,
+      src: "/assets/kratong/kratong-7.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 28,
+    name: "test28",
+    wish: "test wish28",
+    kratong: {
+      id: 8,
+      name: "kratong-8",
+      type: 8,
+      src: "/assets/kratong/kratong-8.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 19,
+    name: "test19",
+    wish: "test wish9",
+    kratong: {
+      id: 6,
+      name: "kratong-6",
+      type: 6,
+      src: "/assets/kratong/kratong-6.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 20,
+    name: "test20",
+    wish: "test wish",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 31,
+    name: "test31",
+    wish: "test wish31",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 32,
+    name: "test32",
+    wish: "test wish32",
+    kratong: {
+      id: 2,
+      name: "kratong-2",
+      type: 2,
+      src: "/assets/kratong/kratong-2.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 23,
+    name: "test23",
+    wish: "test wish13",
+    kratong: {
+      id: 3,
+      name: "kratong-3",
+      type: 3,
+      src: "/assets/kratong/kratong-3.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 24,
+    name: "test24",
+    wish: "test wish24",
+    kratong: {
+      id: 4,
+      name: "kratong-9",
+      type: 9,
+      src: "/assets/kratong/kratong-9.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 25,
+    name: "test25",
+    wish: "test wish25",
+    kratong: {
+      id: 5,
+      name: "kratong-4",
+      type: 4,
+      src: "/assets/kratong/kratong-4.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 26,
+    name: "test26",
+    wish: "test wish26",
+    kratong: {
+      id: 6,
+      name: "kratong-5",
+      type: 5,
+      src: "/assets/kratong/kratong-5.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 27,
+    name: "test27",
+    wish: "test wish27",
+    kratong: {
+      id: 7,
+      name: "kratong-7",
+      type: 7,
+      src: "/assets/kratong/kratong-7.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 28,
+    name: "test28",
+    wish: "test wish28",
+    kratong: {
+      id: 8,
+      name: "kratong-8",
+      type: 8,
+      src: "/assets/kratong/kratong-8.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 29,
+    name: "test29",
+    wish: "test wish29",
+    kratong: {
+      id: 6,
+      name: "kratong-6",
+      type: 6,
+      src: "/assets/kratong/kratong-6.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 30,
+    name: "test30",
+    wish: "test wish30",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 31,
+    name: "test31",
+    wish: "test wish31",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 32,
+    name: "test32",
+    wish: "test wish32",
+    kratong: {
+      id: 2,
+      name: "kratong-2",
+      type: 2,
+      src: "/assets/kratong/kratong-2.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 33,
+    name: "test33",
+    wish: "test wish33",
+    kratong: {
+      id: 3,
+      name: "kratong-3",
+      type: 3,
+      src: "/assets/kratong/kratong-3.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 34,
+    name: "test34",
+    wish: "test wish34",
+    kratong: {
+      id: 4,
+      name: "kratong-9",
+      type: 9,
+      src: "/assets/kratong/kratong-9.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 35,
+    name: "test35",
+    wish: "test wish35",
+    kratong: {
+      id: 5,
+      name: "kratong-4",
+      type: 4,
+      src: "/assets/kratong/kratong-4.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 36,
+    name: "test36",
+    wish: "test wish36",
+    kratong: {
+      id: 6,
+      name: "kratong-5",
+      type: 5,
+      src: "/assets/kratong/kratong-5.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 37,
+    name: "test37",
+    wish: "test wish37",
+    kratong: {
+      id: 7,
+      name: "kratong-7",
+      type: 7,
+      src: "/assets/kratong/kratong-7.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 38,
+    name: "test38",
+    wish: "test wish38",
+    kratong: {
+      id: 8,
+      name: "kratong-8",
+      type: 8,
+      src: "/assets/kratong/kratong-8.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 39,
+    name: "test39",
+    wish: "test wish39",
+    kratong: {
+      id: 6,
+      name: "kratong-6",
+      type: 6,
+      src: "/assets/kratong/kratong-6.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 40,
+    name: "test40",
+    wish: "test wish40",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 41,
+    name: "test41",
+    wish: "test wish41",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 42,
+    name: "test42",
+    wish: "test wish42",
+    kratong: {
+      id: 2,
+      name: "kratong-2",
+      type: 2,
+      src: "/assets/kratong/kratong-2.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 43,
+    name: "test43",
+    wish: "test wish43",
+    kratong: {
+      id: 3,
+      name: "kratong-3",
+      type: 3,
+      src: "/assets/kratong/kratong-3.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 44,
+    name: "test44",
+    wish: "test wish44",
+    kratong: {
+      id: 4,
+      name: "kratong-9",
+      type: 9,
+      src: "/assets/kratong/kratong-9.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 45,
+    name: "test45",
+    wish: "test wish45",
+    kratong: {
+      id: 5,
+      name: "kratong-4",
+      type: 4,
+      src: "/assets/kratong/kratong-4.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 46,
+    name: "test46",
+    wish: "test wish46",
+    kratong: {
+      id: 6,
+      name: "kratong-5",
+      type: 5,
+      src: "/assets/kratong/kratong-5.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 47,
+    name: "test47",
+    wish: "test wish47",
+    kratong: {
+      id: 7,
+      name: "kratong-7",
+      type: 7,
+      src: "/assets/kratong/kratong-7.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 48,
+    name: "test48",
+    wish: "test wish48",
+    kratong: {
+      id: 8,
+      name: "kratong-8",
+      type: 8,
+      src: "/assets/kratong/kratong-8.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 49,
+    name: "test49",
+    wish: "test wish49",
+    kratong: {
+      id: 6,
+      name: "kratong-6",
+      type: 6,
+      src: "/assets/kratong/kratong-6.webp",
+    },
+    loy: false,
+  },
+
+  {
+    id: 50,
+    name: "test50",
+    wish: "test wish50",
+    kratong: {
+      id: 1,
+      name: "kratong-1",
+      type: 1,
+      src: "/assets/kratong/kratong-1.webp",
+    },
+    loy: false,
+  },
 ];
 
 export async function GET(request: Request) {

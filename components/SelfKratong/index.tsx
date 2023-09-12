@@ -10,8 +10,9 @@ import React, {
 } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { WaterOneData } from "@map/animations";
+import SelfKratongPopup from "../SelfKratongPopup";
 import Image from "next/image";
-import GroupKratongPopup from "../GroupKratongPopup";
+
 interface Props {
   sample: any;
 }
@@ -49,7 +50,8 @@ export const MovingKratong: NextPage<{
   let yPosition = getRndInteger(-10, 10);
   let randKratong = getRndInteger(1, 9);
   let delay = getRndDecimal(1, 2);
-  let speed = getRndInteger(50, 200);
+  let speed = getRndInteger(50, 100);
+  const [x, setX] = useState(initialX);
   const zIndex = lane === "t" ? 39 : lane === "m" ? 29 : 9;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -64,7 +66,7 @@ export const MovingKratong: NextPage<{
         }}
         transition={{
           x: {
-            duration: speed,
+            duration: 150,
             ease: "linear",
           },
         }}
@@ -75,29 +77,27 @@ export const MovingKratong: NextPage<{
           transition={WaterOneData.transition}
           className="relative"
         >
-          <GroupKratongPopup lane={lane} info={data} zIndex={zIndex} />
+          <SelfKratongPopup lane={lane} info={data} />
         </motion.div>
       </motion.div>
     </>
   );
 };
 
-export const TopLane: NextPage<{ sample: any }> = ({ sample }) => {
+export const TopLaneSelf: NextPage<{ sample: any }> = ({ sample }) => {
   const [temp, setTemp] = useState<any>([]);
 
   const addKratong = async (item: any, index: any) => {
-    setTimeout(() => {
-      setTemp(
-        temp.concat(
-          <MovingKratong
-            key={`lane-t-${item.name}`}
-            data={item}
-            initialX={index * 600}
-            lane="t"
-          />
-        )
-      );
-    }, getRndInteger(0, 2000));
+    setTemp(
+      temp.concat(
+        <MovingKratong
+          key={`lane-t-${item.name}`}
+          data={item}
+          initialX={index * 600}
+          lane="t"
+        />
+      )
+    );
   };
 
   useEffect(() => {
@@ -116,22 +116,20 @@ export const TopLane: NextPage<{ sample: any }> = ({ sample }) => {
   return <>{temp}</>;
 };
 
-export const MidLane: NextPage<{ sample: any }> = ({ sample }) => {
+export const MidLaneSelf: NextPage<{ sample: any }> = ({ sample }) => {
   const [temp, setTemp] = useState<any>([]);
 
   const addKratong = async (item: any, index: any) => {
-    setTimeout(() => {
-      setTemp(
-        temp.concat(
-          <MovingKratong
-            key={`lane-m-${item.name}`}
-            data={item}
-            initialX={index * 600}
-            lane="m"
-          />
-        )
-      );
-    }, getRndInteger(0, 2000));
+    setTemp(
+      temp.concat(
+        <MovingKratong
+          key={`lane-m-${item.name}`}
+          data={item}
+          initialX={index * 600}
+          lane="m"
+        />
+      )
+    );
   };
 
   // const generateKratong = useMemo(() => {
@@ -142,30 +140,28 @@ export const MidLane: NextPage<{ sample: any }> = ({ sample }) => {
   // }, [sample]);
 
   useEffect(() => {
-    sample.map((item: any, index: any) => {
-      if (item != undefined) addKratong(item, index);
-    });
+    if (sample != undefined) addKratong(sample, 8989);
+    // sample.map((item: any, index: any) => {
+    // });
   }, [sample]);
 
   return <>{temp}</>;
 };
 
-export const BotLane: NextPage<{ sample: any }> = ({ sample }) => {
+export const BotLaneSelf: NextPage<{ sample: any }> = ({ sample }) => {
   const [temp, setTemp] = useState<any>([]);
 
   const addKratong = async (item: any, index: any) => {
-    setTimeout(() => {
-      setTemp(
-        temp.concat(
-          <MovingKratong
-            key={`lane-b-${item.name}`}
-            data={item}
-            initialX={index * 600}
-            lane="b"
-          />
-        )
-      );
-    }, getRndInteger(0, 2000));
+    setTemp(
+      temp.concat(
+        <MovingKratong
+          key={`lane-b-${item.name}`}
+          data={item}
+          initialX={index * 600}
+          lane="b"
+        />
+      )
+    );
   };
 
   // const generateKratong = useMemo(() => {

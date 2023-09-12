@@ -1,13 +1,15 @@
 "use client";
 import type { NextPage } from "next";
 import React, { FC, useEffect, useState, Fragment } from "react";
-import { useWindowDimensions, useAnimationFrame } from "@utils/index";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import useSWR, { mutate } from "swr";
 import axios from "axios";
 import { Lake } from "@components/Water";
 import Lotus from "@components/Lotus";
+import Menu from "../Menu";
+import SocialShared from "@components/SocialShared";
+
 interface Props {}
 
 function classNames(...classes: any[]) {
@@ -40,6 +42,16 @@ const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 const Background: FC<Props> = (): JSX.Element => {
   const [count, setCount] = useState(1);
   const [kratong, setKratong] = useState<any>([]);
+  const [loy, setLoy] = useState<boolean>(false);
+  const [localItem, setLocalItem] = useState<LocalKratongItem>();
+
+  const startLoy = (input: boolean) => {
+    setLoy(input);
+    const temp = window.localStorage.getItem("userData");
+    if (temp) {
+      setLocalItem(JSON.parse(temp));
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -47,6 +59,7 @@ const Background: FC<Props> = (): JSX.Element => {
         process.env.NEXT_PUBLIC_API_URL + `api/kratong?page=${count}&limit=6`;
       const result = await axios(URL);
       const rand = getRandom(result.data.kratong, 8);
+      //@ts-ignore
       setKratong(rand);
 
       if (result.data.nextPage) setCount(count + 1);
@@ -57,25 +70,10 @@ const Background: FC<Props> = (): JSX.Element => {
     } else {
       const timer = setTimeout(() => {
         fetchData();
-      }, 10000);
+      }, 12000);
       return () => clearTimeout(timer);
     }
   }, [count]);
-
-  // const [lanes, setLanes] = useState<any>([[], [], []]);
-
-  // useEffect(() => {
-  //   if (data.length > 0) {
-  //     const lanes = chunk(data, 3);
-  //     setLanes(lanes);
-  //   }
-  // }, [data]);
-
-  // shuffle(data);
-
-  // useEffect(() => {
-  //   console.log(lanes);
-  // });
 
   useEffect(() => {
     for (var i = 0; i < 200; i++) {
@@ -100,6 +98,7 @@ const Background: FC<Props> = (): JSX.Element => {
 
   return (
     <>
+      <Menu onLoy={(input: boolean) => startLoy(input)} />
       <div className="w-full h-[100vh] relative bg-[url('/assets/scene/sky.png')] bg-cover bg-top bg-no-repeat flex justify-center">
         <div className="bg-black/25 w-full h-full z-0 absolute blur-sm" />
 
@@ -143,7 +142,7 @@ const Background: FC<Props> = (): JSX.Element => {
 
           <div className="z-[10] w-full h-1/2 translate-y-5 flex justify-center">
             <div className="w-full h-[400px] absolute bg-[url('/assets/scene/buildings-black.png')] !bg-repeat-x bg-contain  bg-bottom bottom-0  " />
-            <div className="w-fit h-1/3 relative mt-5 md:mt-10  p-6 px-8 lg:p-0 flex justify-center items-center flex-col">
+            <div className="w-fit h-1/3 relative mt-5 md:mt-10   px-8 md:px-20 lg:p-0 flex justify-center items-center flex-col -translate-y-5">
               <div className="w-full h-full relative ">
                 <Image
                   src={"/assets/scene/loy-krathong.svg"}
@@ -155,11 +154,11 @@ const Background: FC<Props> = (): JSX.Element => {
                     objectFit: "contain",
                     objectPosition: "center",
                   }}
-                  className="w-full h-full"
+                  className="w-full h-full xs:scale-90 lg:scale-100"
                 />
               </div>
 
-              <div className="flex flex-col mt-40 absolute text-white left-0 items-center w-full md:mt-56 md:justify-center ">
+              <div className="flex flex-col mt-32 absolute text-white left-0 items-center w-full md:mt-56 md:justify-center ">
                 {/* <p className="text-white text-sm text-center">จำนวนกระทง</p> */}
                 <p className="text-4xl font-bold flex items-end gap-2 md:gap-4 md:text-7xl md:-translate-x-6 whitespace-nowrap">
                   <span className="relative text-base md:text-lg font-normal">
@@ -182,20 +181,8 @@ const Background: FC<Props> = (): JSX.Element => {
         {/* ###### WATER ######## */}
 
         <div className="absolute h-1/2 bottom-0 w-full md:translate-y-5 z-[11] ">
-          <Lake data={kratong} />
+          <Lake data={kratong} onloy={loy} selfKratong={localItem} />
         </div>
-
-        {/* <div className="absolute h-1/2 bottom-0 w-full bg-black translate-y-16 flex flex-col justify-between">
-          <div className="w-full h-full bg-red-400">
-
-          </div>
-          <div className="w-full h-full bg-red-400">
-
-</div>
-<div className="w-full h-full bg-red-400">
-
-</div>
-        </div> */}
 
         {/* ###### FLOWER ######## */}
         <div className="absolute h-fit w-full bottom-0 translate-y-10 !z-[12]">
@@ -382,7 +369,7 @@ const Background: FC<Props> = (): JSX.Element => {
           </div>
         </div>
 
-        <div className="absolute bottom-[-25px] sm:bottom-[-65px] md:bottom-[-50] h-[250px] !z-[13] flex justify-center translate-y-10 items-end w-fit  ">
+        <div className="absolute bottom-[-25px] sm:bottom-[-65px] md:bottom-[-50] h-[200px] !z-[13] flex justify-center translate-y-10 items-end w-fit  ">
           <div className="relative w-full h-full">
             <Image
               unoptimized
@@ -399,15 +386,6 @@ const Background: FC<Props> = (): JSX.Element => {
             />
           </div>
         </div>
-
-        {/* <div className="fixed bottom-7 w-full flex justify-center items-center xmd:hidden !z-[20]">
-          <button
-            type="button"
-            className="bg-[#FFDA00] px-4 py-2 rounded-full overflow-hidden shadow min-w-[150px]"
-          >
-            ลอยกระทง
-          </button>
-        </div> */}
       </div>
     </>
   );

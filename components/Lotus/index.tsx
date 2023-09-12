@@ -10,7 +10,6 @@ import React, {
 } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { WaterOneData } from "@map/animations";
-import { useWindowDimensions, random, useAnimationFrame } from "@utils/index";
 import Image from "next/image";
 
 interface Props {}
